@@ -1,0 +1,21 @@
+<app-header></app-header>
+<h2>Invite friends</h2>
+<form action="/action_page.php">
+
+  <div class="container" align="center">
+    <label for="uname"><b>email</b></label>
+    <div>
+      <input type="text" placeholder="Enter email" name="email" [(ngModel)]="email" required>
+    </div>
+    
+
+    <!-- <label for="psw"><b>Password</b></label>
+    <div>
+      <input type="password" placeholder="Enter Password" name="psw" [(ngModel)]="psw" required>
+    </div> -->
+    
+    <div>
+        <button type="submit" (click)="invite_friends()">Submit</button>
+    </div>
+  </div>
+</form>

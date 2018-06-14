@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body> -->
+
+<h2>Signup Form</h2>
+
+<form action="/action_page.php">
+  <div class="imgcontainer">
+    <img src="../../assets/images/img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container" align="center">
+      <label for="email"><b>e-mail</b></label>
+      <div>
+        <input type="text" placeholder="Enter email" name="email" [(ngModel)]="email" required>
+      </div>
+    <label for="uname"><b>Username</b></label>
+    <div>
+      <input type="text" placeholder="Enter Username" name="uname" [(ngModel)]="uname" required>
+    </div>
+    
+
+    <label for="psw"><b>Password</b></label>
+    <div>
+      <input type="password" placeholder="Enter Password" name="psw" [(ngModel)]="psw" required>
+    </div>
+    
+    <div>
+        <button type="submit" (click)="signup()">Signup</button>
+    </div>    
+    <div *ngIf="err">
+      <span style="color:red">{{err}}</span>
+    </div>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <!-- <button type="button" class="cancelbtn">Cancel</button> -->
+    <span class="cancelbtn">login <a [routerLink]="['/login']">Login?</a></span>
+    <span class="psw">Forgot <a [routerLink]="['/forgot']">password?</a></span>
+  </div>
+</form>
+
+<!-- </body>
+</html> -->

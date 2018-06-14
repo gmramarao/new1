@@ -1,0 +1,71 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<div class="form-gap"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="text-center">
+              <h3><i class="fa fa-lock fa-4x"></i></h3>
+              <h2 class="text-center">Forgot Password?</h2>
+              <p>You can reset your password here.</p>
+              <div class="panel-body">
+
+                <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+                  <!-- gen otp -->
+                  <div *ngIf="!otp_flag">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                        <input id="email" name="email" placeholder="email address" class="form-control"  type="email" [(ngModel)]="email">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <button value="Generate otp" type="submit" (click)="gen_otp()"></button> -->
+                      <input name="recover-submit" class="btn btn-lg btn-success btn-block" value="Generate otp" type="submit" (click)="gen_otp()">
+                    </div>
+                    <div *ngIf="err">
+                        <span style="color:red">{{err}}</span> 
+                    </div>
+                  </div>
+                  <!-- otp verification -->
+                  <div *ngIf="otp_flag && !otp_ver_flag">
+                    <div class="form-group">
+                      <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span>
+                          <input id="otp" name="otp" placeholder="verification code" class="form-control"  type="text" [(ngModel)]="otp">
+                      </div>
+                      <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                          <input id="pwd" name="pwd" placeholder="enter password" class="form-control"  type="password" [(ngModel)]="pwd">
+                      </div>
+                    </div>
+                    <div>
+                        <span style="color:blue">Verification code sent to your email</span> 
+                    </div>
+                    <div class="form-group">
+                        <!-- <button value="Reset Password" type="submit" (click)="forgot_password()"></button> -->
+                        <input name="recover-submit" class="btn btn-lg btn-success btn-block" value="Reset Password" type="submit" (click)="forgot_password()">
+                    </div>
+                    <div *ngIf="err">
+                        <span style="color:red">{{err}}</span> 
+                    </div>
+                  </div>
+                  <div style="background-color:#f1f1f1; text-align: left; position: relative" >
+                    <!-- <button type="button" class="cancelbtn">Cancel</button> -->
+                    <span class="cancelbtn">login <a [routerLink]="['/login']">Login?</a></span>
+                    <span class="psw">Signup <a [routerLink]="['/signup']">Signup?</a></span>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	</div>
+</div>
