@@ -20,6 +20,7 @@ const express = require('express'),
 // app.listen(config.port);
 app.use(express.static('../dist'));
 var server = app.listen(config.port);
+console.log(`server running on port number ${config.port}`);
 var io = require('socket.io')(server);
 app.use(cors());   
 var expressValidator = require('express-validator');
