@@ -12,6 +12,8 @@ import {AuthGuardService} from './auth-guard.service';
 import { HeaderComponent } from './header/header.component';
 import { InvitefriendsComponent } from './invitefriends/invitefriends.component';
 import { ServiceService } from './service.service';
+import { FilterPipe} from './filters/search_filter';
+import { InboxComponent } from './inbox/inbox.component';
 const appRoutes: Routes = [
   {
     path: 'login',
@@ -28,6 +30,11 @@ const appRoutes: Routes = [
   {
     path: 'chat',
     component: ChatboxComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'inbox',
+    component: InboxComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -50,7 +57,9 @@ const appRoutes: Routes = [
     ForgotComponent,
     ChatboxComponent,
     HeaderComponent,
-    InvitefriendsComponent
+    InvitefriendsComponent,
+    FilterPipe,
+    InboxComponent
   ],
   imports: [
     BrowserModule,

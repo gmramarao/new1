@@ -13,43 +13,20 @@
   </div>
   
 </div>
-<!-- <div class="container">
-  <img src="../../assets/images/img_avatar2.png" alt="Avatar" style="width:100%;">
-  <p>Hello. How are you today?</p>
-  <span class="time-right">11:00</span>
-</div>
-
-<div class="container darker">
-  <img src="../../assets/images/img_avatar2.png" alt="Avatar" class="right" style="width:100%;">
-  <p>Hey! I'm fine. Thanks for asking!</p>
-  <span class="time-left">11:01</span>
-</div>
-
-<div class="container">
-  <img src="../../assets/images/img_avatar2.png" alt="Avatar" style="width:100%;">
-  <p>Sweet! So, what do you wanna do today?</p>
-  <span class="time-right">11:02</span>
-</div>
-
-<div class="container darker">
-  <img src="../../assets/images/img_avatar2.png" alt="Avatar" class="right" style="width:100%;">
-  <p class="right">Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-  <span class="time-left">11:05</span>
-</div> -->
-<div>
+<div *ngIf="chat_box.length">
   <input class="textarea" type="text" placeholder="Type here!" name="msg" [(ngModel)]="msg"/>
 </div>
-<div>
+<div *ngIf="chat_box.length">
   <button class="textarea" type="submit" (click)="submit()"> SUBMIT </button>
 </div>
 
 <div class="container clearfix">
   <div class="people-list" id="people-list">
     <div class="search">
-      <input type="text" placeholder="search" />
+      <input type="text" placeholder="search" name = "searchText" [(ngModel)]="searchText"/>
       <i class="fa fa-search"></i>
     </div>
-    <ul class="list" *ngFor="let data of users">
+    <ul class="list" *ngFor="let data of users  | filter : searchText">
       <li class="clearfix" *ngIf="data.user!=user">
         <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" /> -->
         <div class="about">

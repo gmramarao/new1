@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div>
+  <h3> Chat Details </h3>
+  <ng-content></ng-content>
+  <table style="text-align:center" border=1 *ngIf="response">
+      <thead>
+          <tr>
+              <th>From User</th>
+              <th>Message</th>
+              <th>Date</th>
+              <th>Reply</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of response; let i = index">
+                  <td width="25%">{{data.from_user}}</td>
+                  <td width="25%">{{data.msg}}</td>
+                  <td width="25%">{{data.date}}</td>
+                  <td width="10%"><a  [routerLink]="['/chat']" (click)="reply_to_user(data.from_user)">Reply </a></td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<style>
+  table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+th,
+td {
+  padding: 10px 15px;
+}
+thead {
+  background: #395870;
+  color: #fff;
+}
+tbody tr:nth-child(even) {
+  background: #f0f0f2;
+}
+td {
+  border-bottom: 1px solid #cecfd5;
+  border-right: 1px solid #cecfd5;
+}
+td:first-child {
+  border-left: 1px solid #cecfd5;
+}
+
+</style>

@@ -25,6 +25,7 @@ export class ChatboxComponent implements OnInit {
   ngOnInit() {
     this.service.header_satus_change('chat');
     var that = this;
+    
     this.socket.on('new-message', function (data) {
       // data = JSON.parse(data);
       console.log(data);
@@ -37,6 +38,8 @@ export class ChatboxComponent implements OnInit {
     this.id = localStorage.getItem('id');
     this.token = localStorage.getItem('token');
     this.user = localStorage.getItem('user');
+    this.get_user(localStorage.getItem('reply_to_user'));
+    localStorage.setItem('reply_to_user', '');
     this.img = this.user == 'Rama Rao Gaddam' ? '../../assets/images/Ian-felligan-bondi-computer-guy.jpg': '../../assets/images/mahesh-babu-new-photos-feature-image-2dOlvuKIKIs2gmCQkw0e8O.jpg';
     var data = {
       user: this.user,
@@ -97,11 +100,13 @@ export class ChatboxComponent implements OnInit {
       token: this.token,
       to_user: this.to_user,
     }
+    console.log(data);
     this.http.post('http://localhost:7777/get/get-msg', data).subscribe((res: any)=>{
       res = res.json();
       console.log(res);
       if(res.success){
          this.chat_box = res.msg;
+         console.log(this.chat_box);
       } else {
         
       }

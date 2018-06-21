@@ -39,6 +39,17 @@ router.post('/get-msg', (req, res)=>{
     })
 })
 
+router.post('/get-users-data', (req, res)=>{
+    var sql = "SELECT * FROM chat_box WHERE to_user = ?";
+    db_connection.query(sql, req.body.user, (err, doc, fields)=>{
+        if(!err){
+            res.json({success: true, msg: doc});
+        } else {
+            res.json({success: false, err});
+        }
+    })
+})
+
 router.post('/get-users', (req, res)=>{
     var sql = "SELECT user FROM login_info";
     db_connection.query(sql, (err, doc, fields)=>{
