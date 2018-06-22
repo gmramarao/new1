@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServiceService} from '../service.service';
 import {Http} from '@angular/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-invitefriends',
   templateUrl: './invitefriends.component.html',
@@ -11,7 +12,8 @@ export class InvitefriendsComponent implements OnInit {
   token: any;
   email: any;
   user: any;
-  constructor(private service: ServiceService, private http: Http) { }
+  status: Boolean = false;
+  constructor(private service: ServiceService, private http: Http, private router: Router) { }
 
   ngOnInit() {
     this.id = localStorage.getItem('id');
@@ -29,11 +31,16 @@ export class InvitefriendsComponent implements OnInit {
     }
     this.http.post('http://localhost:7777/get/invitefriends', data).subscribe((res: any)=>{
       res = res.json();
-      console.log(res);
       if(res.success){
-
+        this.status = true;
+        var that = this;
+        setTimeout(function(){ 
+          that.router.navigate(['/chat']);
+         }, 5000);
+        this.email = '';
       } else {
-
+        this.status = false;
+        this.email = '';
       }
     })
   }

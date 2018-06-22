@@ -79,7 +79,7 @@ export class ChatboxComponent implements OnInit {
       id: this.id,
       token: this.token,
       to_user: this.to_user,
-      date: new Date(),
+      date: new Date().toLocaleString(),
       img: this.img
     }
     this.http.post('http://localhost:7777/get/msg-post', data).subscribe((res:any)=>{

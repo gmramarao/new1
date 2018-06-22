@@ -17,5 +17,8 @@
     <div>
         <button type="submit" (click)="invite_friends()">Submit</button>
     </div>
+    <div *ngIf="status">
+      <span style="color:blue">Successfully invited your friend</span> 
+    </div>
   </div>
 </form>
