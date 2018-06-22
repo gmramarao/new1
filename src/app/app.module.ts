@@ -14,6 +14,7 @@ import { InvitefriendsComponent } from './invitefriends/invitefriends.component'
 import { ServiceService } from './service.service';
 import { FilterPipe} from './filters/search_filter';
 import { InboxComponent } from './inbox/inbox.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 const appRoutes: Routes = [
   {
     path: 'login',
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     FormsModule,
-    HttpModule
+    HttpModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [AuthGuardService, ServiceService],
   bootstrap: [AppComponent]

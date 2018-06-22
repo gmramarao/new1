@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
 import { ServiceService } from '../service.service';
 import * as io from 'socket.io-client';
+declare var jquery:any;
+declare var $ :any;
 @Component({
   selector: 'app-chatbox',
   templateUrl: './chatbox.component.html',
@@ -120,4 +122,9 @@ export class ChatboxComponent implements OnInit {
     //   this.get_chat_box(); 
     //   }, 5000);
   }
+
+
+  
 }
+
+
