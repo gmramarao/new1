@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express'),
     router = express.Router(),
-    bcrypt = require('bcrypt'),
+    bcrypt = require('bcryptjs'),
     jwt = require('jsonwebtoken'),
     async = require('async'),
     email_check = require('email-check'),
