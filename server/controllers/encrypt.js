@@ -1,9 +1,9 @@
 'use strict';
-const // bcrypt = require('bcrypt'),
+const bcrypt = require('bcrypt'),
       async = require('async');
 
 function encrypt_pwd(pwd, callback1){
-    /*async.waterfall([
+    async.waterfall([
         function(callback){
             bcrypt.genSalt(10, callback);
         },
@@ -17,7 +17,7 @@ function encrypt_pwd(pwd, callback1){
         } else {
             callback1(err, null);
         }
-    })*/
+    })
   
   callback1(null, pwd);
     
