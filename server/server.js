@@ -16,6 +16,11 @@ const express = require('express'),
     var controller /*= require('./controllers/controller.js')*/,
     _initialEtherAmount = "0.011",
     etherValueInWei = 1000000000000000000,
+
+    chai = require('chai'),
+    chaiHttp = require('chai-http'),
+    assert = require('assert'),
+
     db_connection = require('./config/dbconnection.js');
 // app.listen(config.port);
 app.use(express.static('../dist'));
@@ -30,6 +35,34 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('common', {stream: fs.createWriteStream('./access.log', {flags: 'a'})}))
 app.use(morgan('dev'));
+
+let should = chai.should();
+chai.use(chaiHttp);
+
+// it('Main page content', function(done) {
+//   // request('http://localhost:8080' , function(error, response, body) {
+//   //     expect(body).to.equal('Hello World');
+//   //     done();
+//   // });
+// });
+
+const Mocha = require('Mocha');
+const mocha = new Mocha();
+// const assert = require('chai').assert;
+
+//do normal Node.js things
+
+// mocha.run(() => {
+//      describe('an amazing suite of tests', () => {
+//          it('should be true', () => {
+//              assert.equal(true, true);
+//          });
+//      });
+// });
+
+
+
+
 app.use('/login',login);
 
 io.on('connection', function(socket) {

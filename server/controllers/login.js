@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express'),
     router = express.Router(),
-    bcrypt = require('bcrypt'),
+    bcrypt = require('bcrypt-node'),
     jwt = require('jsonwebtoken'),
     async = require('async'),
     email_check = require('email-check'),
@@ -10,6 +10,8 @@ const express = require('express'),
     multer = require('multer'),
     shortid = require('shortid'),
     db_connection = require('../config/dbconnection.js'),
+    // mongojs = require('mongojs'),
+    // db = ('chatDb', ['login_info', 'chat']),
     encrypt = require('./encrypt.js');
 
 
@@ -19,6 +21,10 @@ router.post('/login', (req, res)=>{
     var id;
     async.waterfall([
         function(callback){
+
+            // db.login_info.find({user: req.body.user},callback);
+
+
             var sql = 'SELECT * FROM login_info WHERE ?';
             db_connection.query(sql,{user: req.body.user},callback);
         },
@@ -34,6 +40,8 @@ router.post('/login', (req, res)=>{
         },
         function(compare, callback){
             if(compare){
+
+                // db.login_info.update({user: req.body.user}, { $set:{ secret: secret}}, callback);
                 var sql = "UPDATE login_info SET secret = ? WHERE user = ?"; 
                 db_connection.query(sql, [secret, req.body.user], callback);
             } else {
@@ -70,6 +78,7 @@ router.post('/signup', (req, res)=>{
         function(check, callback){
             console.log(check);
             if(check){
+                // db.login_info.find({email: req.body.email}, callback);
                 var sql = 'SELECT * FROM login_info WHERE ?';
                 db_connection.query(sql,{email: req.body.email},callback);
             } else {
@@ -81,6 +90,7 @@ router.post('/signup', (req, res)=>{
             if(doc.length){
                 res.json({success: false, msg: 'email already existed'});
             } else {
+                // db.login_info.find({user: req.body.user}, callback);
                 var sql = 'SELECT * FROM login_info WHERE ?';
                 db_connection.query(sql,{user: req.body.user},callback);
             }
@@ -99,6 +109,7 @@ router.post('/signup', (req, res)=>{
                 id: shortid.generate(),
                 password: hash
             }
+            // db.login_info.insert(data, callback);
             var sql = 'INSERT INTO login_info SET ?';
             db_connection.query(sql, data, callback);
         }
@@ -116,6 +127,7 @@ router.post('/signup', (req, res)=>{
 router.post('/forgot-password', (req, res)=>{
     async.waterfall([
         function(callback){
+            // db.login_info.find({email: req.body.email}, callback);
             var sql = 'SELECT * FROM login_info WHERE ?';
             db_connection.query(sql,{email: req.body.email},callback);
         },
@@ -131,6 +143,7 @@ router.post('/forgot-password', (req, res)=>{
             }
         },
         function(hash, callback){
+            // db.login_info.update({email: req.body.email},{ $set:{ password: hash}}, callback);
             var sql = "UPDATE login_info SET password = ? WHERE email = ?";
             db_connection.query(sql,[hash, req.body.email], callback);
         }
@@ -146,6 +159,7 @@ router.post('/forgot-password', (req, res)=>{
 router.put('/change-password', (req, res)=>{
     async.waterfall([
         function(callback){
+            // db.login_info.find({user: req.body.user}, callback);
             var sql = 'SELECT * FROM login_info WHERE ?';
             db_connection.query(sql,{user: req.body.user},callback);
         },
@@ -165,6 +179,7 @@ router.put('/change-password', (req, res)=>{
             }
         }, 
         function(hash, callback){
+            // db.login_info.update({user: req.body.user},{$set:{password: hash}}, callback);
             var sql = "UPDATE login_info SET password = ? WHERE user = ?";
             db_connection.query(sql,[hash, req.body.user], callback);
         }
@@ -197,6 +212,7 @@ router.post('/gen-otp', (req, res)=>{
     transporter.sendMail(mailOptions, function (err, info) {
         if(!err){
             console.log(info);
+            // db.login_info.update({email: req.body.email},{$set:{otp: gen_random}}, callback);
             var sql = "UPDATE login_info SET otp = ? WHERE email = ?";
             db_connection.query(sql, [gen_random, req.body.email], (err, doc, fields)=>{
                 console.log('i am also excuted');

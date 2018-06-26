@@ -537,6 +537,14 @@ input.textarea {
    box-shadow: none;
  }
  
+ /* div.ex1 {
+  background-color: lightblue;
+  width: 110px;
+  height: 110px;
+  overflow: scroll;
+} */
+
+
  @media screen and (max-width: 700px) {
    .app {
      top: 0;
@@ -652,4 +660,6 @@ input.textarea {
      padding: 5px 2px 5px 0 !important;
      font-size: 1.8em !important;
    }
+
+
  }

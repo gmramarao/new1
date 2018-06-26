@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Http} from '@angular/http';
 import { Router } from '@angular/router';
+import {FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  email = new FormControl('', [Validators.required]);
+  
+    getErrorMessage() {
+      return this.email.hasError('required') ? 'You must enter a value' :
+          this.email.hasError('email') ? 'Not a valid email' :
+              '';
+    }
   constructor(private http: Http, private router: Router) { }
   uname: any;
   psw: any;

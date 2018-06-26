@@ -1,5 +1,5 @@
 'use strict';
-const bcrypt = require('bcrypt'),
+const bcrypt = require('bcrypt-node'),
       async = require('async');
 
 function encrypt_pwd(pwd, callback1){

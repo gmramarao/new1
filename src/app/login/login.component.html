@@ -13,22 +13,26 @@
   </div>
 
   <div class="container" align="center">
-    <label for="uname"><b>Username</b></label>
+    <label for="uname">
+      <b>Username</b>
+    </label>
     <div>
       <input type="text" placeholder="Enter Username" name="uname" [(ngModel)]="uname" required>
     </div>
-    
 
-    <label for="psw"><b>Password</b></label>
+
+    <label for="psw">
+      <b>Password</b>
+    </label>
     <div>
       <input type="password" placeholder="Enter Password" name="psw" [(ngModel)]="psw" required>
     </div>
-    
+
     <div>
-        <button type="submit" (click)="login()">Login</button>
-    </div>    
+      <button type="submit" (click)="login()">Login</button>
+    </div>
     <div *ngIf="err">
-      <span style="color:red">{{err}}</span> 
+      <span style="color:red">{{err}}</span>
     </div>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -37,11 +41,23 @@
 
   <div class="container" style="background-color:#f1f1f1">
     <!-- <button type="button" class="cancelbtn">Cancel</button> -->
-    <span class="cancelbtn">Signup <a [routerLink]="['/signup']">Signup?</a></span>
-    <span class="psw">Forgot <a [routerLink]="['/forgot']">password?</a></span>
-    <span class="psw">GOOGLE <a href="http://localhost:7777/api/authentication/google/start">GOOGLE?</a></span>
+    <span class="cancelbtn">Signup
+      <a [routerLink]="['/signup']">Signup?</a>
+    </span>
+    <span class="psw">Forgot
+      <a [routerLink]="['/forgot']">password?</a>
+    </span>
+    <span class="psw">GOOGLE
+      <a href="http://localhost:7777/api/authentication/google/start">GOOGLE?</a>
+    </span>
   </div>
 </form>
 
 <!-- </body>
 </html> -->
+<div class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Enter your email" [formControl]="email" required>
+    <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+  </mat-form-field>
+</div>
