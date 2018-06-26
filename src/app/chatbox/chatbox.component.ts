@@ -48,7 +48,7 @@ export class ChatboxComponent implements OnInit {
       id: this.id,
       token: this.token
     }
-    this.http.post('http://localhost:7777/get/get-users', data ).subscribe((res: any)=>{
+    this.http.post('get/get-users', data ).subscribe((res: any)=>{
         res = res.json();
         console.log(res);
         if(res.success){
@@ -84,7 +84,7 @@ export class ChatboxComponent implements OnInit {
       date: new Date().toLocaleString(),
       img: this.img
     }
-    this.http.post('http://localhost:7777/get/msg-post', data).subscribe((res:any)=>{
+    this.http.post('get/msg-post', data).subscribe((res:any)=>{
       res = res.json();
       if(res.success){
         this.msg = '';
@@ -103,7 +103,7 @@ export class ChatboxComponent implements OnInit {
       to_user: this.to_user,
     }
     console.log(data);
-    this.http.post('http://localhost:7777/get/get-msg', data).subscribe((res: any)=>{
+    this.http.post('get/get-msg', data).subscribe((res: any)=>{
       res = res.json();
       console.log(res);
       if(res.success){

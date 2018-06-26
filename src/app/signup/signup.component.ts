@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
       password: this.psw
     }
     if(data.email && data.user && data.password){
-      this.http.post('http://localhost:7777/login/signup', data).subscribe((res: any)=>{
+      this.http.post('login/signup', data).subscribe((res: any)=>{
         console.log(res);
         res = res.json();
         if(res.success){

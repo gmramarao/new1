@@ -29,7 +29,7 @@ export class InvitefriendsComponent implements OnInit {
       email: this.email,
       user: this.user
     }
-    this.http.post('http://localhost:7777/get/invitefriends', data).subscribe((res: any)=>{
+    this.http.post('get/invitefriends', data).subscribe((res: any)=>{
       res = res.json();
       if(res.success){
         this.status = true;

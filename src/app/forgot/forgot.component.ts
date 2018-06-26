@@ -22,7 +22,7 @@ export class ForgotComponent implements OnInit {
       email: this.email
     }
     if(data.email){
-      this.http.post('http://localhost:7777/login/gen-otp', data).subscribe((res:any)=>{
+      this.http.post('login/gen-otp', data).subscribe((res:any)=>{
         res = res.json();
         if(res.success){
          this.err = '';
@@ -45,7 +45,7 @@ export class ForgotComponent implements OnInit {
 
     }
     if(data.otp && data.password){
-      this.http.post('http://localhost:7777/login/forgot-password', data).subscribe((res:any)=>{
+      this.http.post('login/forgot-password', data).subscribe((res:any)=>{
         res = res.json();
         console.log(res);
         if(res.success){

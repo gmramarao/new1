@@ -8,13 +8,6 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  email = new FormControl('', [Validators.required]);
-  
-    getErrorMessage() {
-      return this.email.hasError('required') ? 'You must enter a value' :
-          this.email.hasError('email') ? 'Not a valid email' :
-              '';
-    }
   constructor(private http: Http, private router: Router) { }
   uname: any;
   psw: any;
@@ -34,7 +27,7 @@ export class LoginComponent implements OnInit {
       password: this.psw 
     }
     if(data.user && data.password){
-      this.http.post('http://localhost:7777/login/login', data).subscribe((res: any)=>{
+      this.http.post('login/login', data).subscribe((res: any)=>{
         res = res.json();
         console.log(res);
         if(res.success){

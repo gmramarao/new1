@@ -25,7 +25,7 @@ export class InboxComponent implements OnInit {
       id: this.id,
       token: this.token
     }
-    this.http.post('http://localhost:7777/get/get-users-data', data).subscribe((res: any) => {
+    this.http.post('get/get-users-data', data).subscribe((res: any) => {
       res = res.json();
       console.log(res);
       if (res.success) {

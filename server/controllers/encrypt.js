@@ -5,10 +5,11 @@ const bcrypt = require('bcrypt-node'),
 function encrypt_pwd(pwd, callback1){
     async.waterfall([
         function(callback){
-            bcrypt.genSalt(10, callback);
+            // bcrypt.genSalt(10, callback);
+            callback(null, 'salt');
         },
         function(salt, callback){
-            bcrypt.hash(pwd, salt, callback)
+            bcrypt.hash(pwd, null, null, callback)
         }
     ], (err, hash)=>{
         console.log(err);
@@ -19,7 +20,7 @@ function encrypt_pwd(pwd, callback1){
         }
     })
   
-  callback1(null, pwd);
+//   callback1(null, pwd);
     
 }
 
