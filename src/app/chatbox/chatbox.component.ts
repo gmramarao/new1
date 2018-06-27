@@ -136,13 +136,14 @@ export class ChatboxComponent implements OnInit {
 
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event) {
-    var data = {
-      user: this.user, 
-    }
-    localStorage.clear();
-    this.http.post('login/logout', data).subscribe((res: any)=>{
-      console.log(res);
-    })
+    console.log(event);
+    // var data = {
+    //   user: this.user, 
+    // }
+    // localStorage.clear();
+    // this.http.post('login/logout', data).subscribe((res: any)=>{
+    //   console.log(res);
+    // })
   }
 
   

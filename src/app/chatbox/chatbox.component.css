@@ -536,6 +536,14 @@ input.textarea {
    text-indent: 5px;
    box-shadow: none;
  }
+
+ .dot {
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
  
  /* div.ex1 {
   background-color: lightblue;
