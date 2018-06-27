@@ -134,7 +134,6 @@ router.post('/forgot-password', (req, res)=>{
         function(data, fields, callback){
             if(data.length){
                 if(data[0].otp === req.body.otp){
-                    console.log(' i am calling abba');
                     encrypt.encrypt_pwd(req.body.password, callback);
                 } else {
                     res.json({success: false, msg:'otp not matched'});
@@ -144,7 +143,6 @@ router.post('/forgot-password', (req, res)=>{
             }
         },
         function(hash, callback){
-            console.log(' i am also calling');
             // db.login_info.update({email: req.body.email},{ $set:{ password: hash}}, callback);
             var sql = "UPDATE login_info SET password = ? WHERE email = ?";
             db_connection.query(sql,[hash, req.body.email], callback);
