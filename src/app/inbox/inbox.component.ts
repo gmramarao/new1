@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Http } from '@angular/http';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
@@ -40,6 +40,16 @@ export class InboxComponent implements OnInit {
   reply_to_user(reply_to_user){
     localStorage.setItem('reply_to_user', reply_to_user);
     this.router.navigate(['/chat']);
+  }
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event) {
+    var data = {
+      user: this.user, 
+    }
+    localStorage.clear();
+    this.http.post('login/logout', data).subscribe((res: any)=>{
+      console.log(res);
+    })
   }
 
 }

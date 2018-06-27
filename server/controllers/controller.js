@@ -97,7 +97,7 @@ router.post('/get-users', (req, res)=>{
     // })
 
 
-    var sql = "SELECT user FROM login_info";
+    var sql = "SELECT user, online FROM login_info";
     db_connection.query(sql, (err, doc, fields)=>{
         if(!err){
             res.json({success: true, msg: doc});
@@ -132,5 +132,7 @@ router.post('/invitefriends', (req, res)=>{
 function send_msg(data){
     socket_server.send_data({to_user: data.to_user, user: data.user});
 }
-
+function send_user_status(data){
+    socket_server.send_user_status(data);
+}
 module.exports = router;

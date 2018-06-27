@@ -14,6 +14,17 @@ export class SignupComponent implements OnInit {
   constructor(private http: Http, private router: Router) { }
 
   ngOnInit() {
+    // localStorage.clear();
+    var data = {
+      user: localStorage.getItem('user') 
+    }
+    if(localStorage.getItem('user')) {
+      this.http.post('login/logout', data).subscribe((res: any)=>{
+        console.log(res);
+        localStorage.clear();
+      })
+    }
+    
   }
   signup(){
     const data = {

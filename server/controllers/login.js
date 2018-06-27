@@ -10,6 +10,7 @@ const express = require('express'),
     multer = require('multer'),
     shortid = require('shortid'),
     db_connection = require('../config/dbconnection.js'),
+    socket_server = require('../server.js'),
     // mongojs = require('mongojs'),
     // db = ('chatDb', ['login_info', 'chat']),
     encrypt = require('./encrypt.js');
@@ -41,9 +42,9 @@ router.post('/login', (req, res)=>{
         function(compare, callback){
             if(compare){
 
-                // db.login_info.update({user: req.body.user}, { $set:{ secret: secret}}, callback);
-                var sql = "UPDATE login_info SET secret = ? WHERE user = ?"; 
-                db_connection.query(sql, [secret, req.body.user], callback);
+                // db.login_info.update({user: req.body.user}, { $set:{ secret: secret, online: 'Y'}}, callback);
+                var sql = "UPDATE login_info SET secret = ?,  online = ? WHERE user = ?"; 
+                db_connection.query(sql, [secret, 'Y', req.body.user], callback);
             } else {
                 res.json({success: false, msg:'password not matched'});
             }
@@ -53,11 +54,35 @@ router.post('/login', (req, res)=>{
         }
     ], (err, token)=>{
         if(!err){
+            socket_server.send_user_status(true);
             res.json({success: true, msg:{token: token, id: id}});
+            
         } else {
             res.json({success: false, msg:err});
         }
     })
+})
+
+
+
+
+router.post('/logout', (req, res)=>{
+    // db.login_info.update({user: req.body.user}, {$set:{online: 'N'}}, (err, doc)=>{
+    //     if(!err){
+    //         res.json({succes : true, msg: doc});
+    //     } else {
+    //         res.json({succes: false, msg: err});
+    //     }
+    // })
+    var sql = "UPDATE login_info SET online = ? WHERE user = ?"
+    db_connection.query(sql, ['N', req.body.user], (err, doc)=>{
+        if(!err){
+            socket_server.send_user_status(true);
+            res.json({succes : true, msg: doc});
+        } else {
+            res.json({succes: false, msg: err});
+        }
+    });
 })
 
 
@@ -292,7 +317,6 @@ router.post('/send-sms', (req, res)=>{
 
 
 //mysql querys
-
 
 router.post('/mysql-order', (req, res)=>{
     var sql = "SELECT * FROM login_info ORDER BY user";
@@ -545,7 +569,7 @@ router.post('/mysql-drop', (req, res)=>{
 
 router.post('/mysql-alter', (req, res)=>{
     // var sql = "ALTER TABLE login_info ADD otp varchar(255)";
-    var sql = "ALTER TABLE chat_box ADD img varchar(255)";
+    var sql = "ALTER TABLE login_info ADD online varchar(255)";
     db_connection.query(sql, (err,doc, fields)=>{
         if(!err){
             res.json({success: true, msg: doc});

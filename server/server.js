@@ -11,9 +11,9 @@ const express = require('express'),
     config = require('./config/config.js'),
     jwt = require('jsonwebtoken'),
     fs = require('file-system'),
-    morgan = require('morgan'),
-    login = require('./controllers/login.js');
+    morgan = require('morgan');
     var controller /*= require('./controllers/controller.js')*/,
+    login,
     _initialEtherAmount = "0.011",
     etherValueInWei = 1000000000000000000,
 
@@ -59,9 +59,26 @@ const mocha = new Mocha();
 //          });
 //      });
 // });
+var send_user_status = function(data){
+  io.emit('users-status', data);
+}
+
+var send_data = function(data){
+  console.log(data);
+io.emit('new-message', data);
+}
 
 
 
+// io.emit('connection', io);
+
+module.exports = {
+  send_data: send_data,
+  send_user_status: send_user_status 
+}
+
+login = require('./controllers/login.js');
+controller = require('./controllers/controller.js');
 
 app.use('/login',login);
 
@@ -74,18 +91,6 @@ io.on('connection', function(socket) {
     
 });
 
- var send_data = function(data){
-     console.log(data);
-    io.emit('new-message', data);
- }
-
- 
-// io.emit('connection', io);
-
-module.exports = {
-    send_data: send_data 
-}
-controller = require('./controllers/controller.js');
 app.use('/get', controller);
 const passportGoogle = require('passport-google-oauth');
 

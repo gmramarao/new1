@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Http} from '@angular/http';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
@@ -13,12 +13,17 @@ export class LoginComponent implements OnInit {
   psw: any;
   err: any;
   ngOnInit() {
-    localStorage.clear();
+    // localStorage.clear();
+    var data = {
+      user: localStorage.getItem('user') 
+    }
+    if(localStorage.getItem('user')) {
+      this.http.post('login/logout', data).subscribe((res: any)=>{
+        console.log(res);
+        localStorage.clear();
+      })
+    }
     
-    // regular expression
-
-    const name = 'ramaraogaddam';
-    console.log(name.search('\d'));
   }
 
   login(){
@@ -45,5 +50,7 @@ export class LoginComponent implements OnInit {
     }
     
   }
+
+  
 
 }

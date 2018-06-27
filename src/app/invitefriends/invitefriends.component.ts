@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {ServiceService} from '../service.service';
 import {Http} from '@angular/http';
 import { Router } from '@angular/router';
@@ -42,6 +42,17 @@ export class InvitefriendsComponent implements OnInit {
         this.status = false;
         this.email = '';
       }
+    })
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event) {
+    var data = {
+      user: this.user, 
+    }
+    localStorage.clear();
+    this.http.post('login/logout', data).subscribe((res: any)=>{
+      console.log(res);
     })
   }
 }
