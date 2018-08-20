@@ -111,8 +111,8 @@ router.post('/invitefriends', (req, res)=>{
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-               user: 'ramarao.g92@gmail.com',
-               pass: '8500759698'
+               user: 'XXXXXXXXXXXXXXXXXX',
+               pass: 'XXXXXXXXXXXXXXXXXX'
            }
     });
     const mailOptions = {
