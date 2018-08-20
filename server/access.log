@@ -1526,3 +1526,4 @@
 ::1 - - [27/Jun/2018:11:50:25 +0000] "POST /get/get-users HTTP/1.1" 200 214
 ::1 - - [27/Jun/2018:11:50:25 +0000] "POST /get/get-users HTTP/1.1" 200 214
 ::1 - - [27/Jun/2018:11:50:27 +0000] "GET /styles/style.css HTTP/1.1" 304 -
+::1 - - [02/Jul/2018:05:12:51 +0000] "GET /styles/style.css HTTP/1.1" 200 704
