@@ -19,7 +19,9 @@ export class ChatboxComponent implements OnInit {
   users: any = [];
   to_user: any;
   socket;
+  to_user_pic;
   url = 'http://localhost:7777';
+  pic = '';
   constructor(private http: Http, private service: ServiceService) {
     this.socket = io.connect();
   }
@@ -46,7 +48,8 @@ export class ChatboxComponent implements OnInit {
     this.id = localStorage.getItem('id');
     this.token = localStorage.getItem('token');
     this.user = localStorage.getItem('user');
-    this.get_user(localStorage.getItem('reply_to_user'));
+    this.pic = localStorage.getItem('pic');
+    this.get_user(localStorage.getItem('reply_to_user'), '');
     localStorage.setItem('reply_to_user', '');
     this.img = this.user == 'Rama Rao Gaddam' ? '../../assets/images/Ian-felligan-bondi-computer-guy.jpg' : '../../assets/images/mahesh-babu-new-photos-feature-image-2dOlvuKIKIs2gmCQkw0e8O.jpg';
     this.get_users();
@@ -126,9 +129,10 @@ export class ChatboxComponent implements OnInit {
 
 
 
-  get_user(user) {
+  get_user(user, pic) {
     this.to_user = user;
     this.get_chat_box();
+    this.to_user_pic = pic;
     // setInterval(() => {
     //   this.get_chat_box(); 
     //   }, 5000);

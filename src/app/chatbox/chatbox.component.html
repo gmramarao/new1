@@ -77,7 +77,8 @@
           <div class="row heading">
             <div class="col-sm-3 col-xs-3 heading-avatar">
               <div class="heading-avatar-icon">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg">
+                <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg"> -->
+                <img [src]="pic">
               </div>
             </div>
             <div class="col-sm-1 col-xs-1  heading-dot  pull-right">
@@ -96,10 +97,11 @@
             </div>
           </div>
           <div class="row sideBar" *ngFor="let data of users  | filter : searchText">
-            <div class="row sideBar-body" *ngIf="data.user!=user"  (click)="get_user(data.user)" [style.background-color] = "to_user == data.user ? 'green' : ''" >
+            <div class="row sideBar-body" *ngIf="data.user!=user"  (click)="get_user(data.user, data.pic)" [style.background-color] = "to_user == data.user ? 'green' : ''" >
               <div class="col-sm-3 col-xs-3 sideBar-avatar">
                 <div class="avatar-icon">
-                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg"> 
+                  <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg">  -->
+                  <img [src]="data.pic"> 
                   <span *ngIf="data.online=='Y'" class= "dot"></span>
                 </div>
               </div>
@@ -125,7 +127,8 @@
         <div class="row heading">
           <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
             <div class="heading-avatar-icon">
-              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg">
+              <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg"> -->
+              <img [src]= "to_user_pic" *ngIf="to_user_pic">
             </div>
           </div>
           <div class="col-sm-8 col-xs-7 heading-name">

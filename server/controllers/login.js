@@ -20,6 +20,7 @@ const express = require('express'),
 router.post('/login', (req, res)=>{
     var secret = Math.random().toString(36).substring(7);
     var id;
+    var pic;
     async.waterfall([
         function(callback){
 
@@ -33,6 +34,7 @@ router.post('/login', (req, res)=>{
             console.log(doc);
             if(doc.length){
                 id = doc[0].id;
+                pic = doc[0].pic;
                 bcrypt.compare(req.body.password, doc[0].password, callback);
             } else {
                 res.json({success: false, msg: 'User not registered'});
@@ -55,7 +57,7 @@ router.post('/login', (req, res)=>{
     ], (err, token)=>{
         if(!err){
             socket_server.send_user_status(true);
-            res.json({success: true, msg:{token: token, id: id}});
+            res.json({success: true, msg:{token: token, id: id, pic: pic}});
             
         } else {
             res.json({success: false, msg:err});

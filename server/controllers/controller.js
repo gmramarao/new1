@@ -97,7 +97,7 @@ router.post('/get-users', (req, res)=>{
     // })
 
 
-    var sql = "SELECT user, online FROM login_info";
+    var sql = "SELECT user, online, pic FROM login_info";
     db_connection.query(sql, (err, doc, fields)=>{
         if(!err){
             res.json({success: true, msg: doc});

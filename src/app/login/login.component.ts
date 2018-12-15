@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('id', res.msg.id);
           localStorage.setItem('user', this.uname);
           localStorage.setItem('token', res.msg.token);
+          localStorage.setItem('pic', res.msg.pic);
           this.router.navigate(['chat']);
         } else {
           this.err = res.msg;
